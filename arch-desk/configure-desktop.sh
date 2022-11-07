@@ -15,43 +15,43 @@ git clone https://github.com/KrossKD/desk-config.git
 
 #Update System before installation
 echo "Updating system"
-#sudo pacman -Su
+sudo pacman -Su
 
 #Installing Apps
 echo "Fetching required applications list"
-#cat desk-config/arch-desk/req-apps.txt
 appslist="desk-config/arch-desk/req-apps.txt"
+
 echo "Installing applications"
-#while read line; 
-#do echo "Installing: $line";
-#sudo pacman -Sq $line; 
-#done < $appslist
+while read line; 
+do echo "Installing: $line";
+sudo pacman -Sq $line; 
+done < $appslist
 
 #Check if Qtile has been installed
 echo "Checking for qtile package"
 if !(sudo pacman -Qi qtile > /dev/null); then
-echo "DISABLED Installing QTile because it's not in app list.";
-#sudo pacman -Su qtile
+echo "Installing QTile because it's not in app list.";
+sudo pacman -Su qtile
 fi
 
 echo "Updating qtile configuration"
 qtileconf="desk-config/arch-desk/qtile-config.py"
-cp $qtileconf ~/.config/qtile/config1.py
+cp $qtileconf ~/.config/qtile/config.py
 
 echo "Updating autostart script"
 qtileauto="desk-config/arch-desk/qtile-autostart.sh"
-cp $qtileauto ~/.config/qtile/scripts/autostart1.sh
+cp $qtileauto ~/.config/qtile/scripts/autostart.sh
 
 #Check if sxhkd has been installed
 echo "Checking for sxhkd (Hotkey Daemon) package"
 if !(sudo pacman -Qi sxhkd > /dev/null); then
-echo "DISABLED Installing sxhkd because it's not in app list.";
-#sudo pacman -Su sxhkd
+echo "Installing sxhkd because it's not in app list.";
+sudo pacman -Su sxhkd
 fi
 
 echo "Updating sxhkd configuration"
 sxhkdconf="desk-config/arch-desk/sxhkd-config.txt"
-cp $sxhkdconf ~/.config/qtile/sxhkd/sxhkdrc1
+cp $sxhkdconf ~/.config/qtile/sxhkd/sxhkdrc
 
 #cleaning up
 echo "Cleaning and removing temporary folders"
